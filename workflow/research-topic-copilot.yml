@@ -1,0 +1,761 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: 选题v3
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/deepseek:0.0.12@37699cc3d1ea9e006348a7273a514f3ddf60ffb0649dc735c594c8da6a80934b
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: llm
+      id: 1774533352255-llm
+      selected: false
+      source: '1774533352255'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1774534693958-c101a899-6ab8-4da9-9f46-7fcaeb3fd601-1774536068334-target
+      selected: false
+      source: '1774534693958'
+      sourceHandle: c101a899-6ab8-4da9-9f46-7fcaeb3fd601
+      target: '1774536068334'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: answer
+      id: 1774536068334-source-1774535950033-target
+      selected: false
+      source: '1774536068334'
+      sourceHandle: source
+      target: '1774535950033'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: llm-source-1774536551011-target
+      selected: false
+      source: llm
+      sourceHandle: source
+      target: '1774536551011'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1774536551011-source-1774534693958-target
+      selected: false
+      source: '1774536551011'
+      sourceHandle: source
+      target: '1774534693958'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1774534693958-false-1774536068334-target
+      selected: false
+      source: '1774534693958'
+      sourceHandle: 'false'
+      target: '1774536068334'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: agent
+      id: 1774534693958-true-1774536894669-target
+      selected: false
+      source: '1774534693958'
+      sourceHandle: 'true'
+      target: '1774536894669'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: agent
+        targetType: answer
+      id: 1774536894669-source-1774538102591-target
+      selected: false
+      source: '1774536894669'
+      sourceHandle: source
+      target: '1774538102591'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1774534693958-ac07b7a5-8f20-4420-a1a8-99ae5d19c1d0-1774541255600-target
+      selected: false
+      source: '1774534693958'
+      sourceHandle: ac07b7a5-8f20-4420-a1a8-99ae5d19c1d0
+      target: '1774541255600'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1774541255600-source-1774541399096-target
+      selected: false
+      source: '1774541255600'
+      sourceHandle: source
+      target: '1774541399096'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: 接收用户的初始研究想法、研究领域以及核心客观资源限制（如预算、算力）。
+        selected: false
+        title: 输入：意图与资源约束
+        type: start
+        variables:
+        - hint: ''
+          label: research_domain
+          options:
+          - 计算机科学
+          - 金融工程
+          - 大模型
+          - 新能源
+          placeholder: ''
+          required: true
+          type: select
+          variable: research_domain
+        - default: ''
+          hint: ''
+          label: available_resources
+          options: []
+          placeholder: ''
+          required: false
+          type: text-input
+          variable: available_resources
+        - default: ''
+          hint: ''
+          label: initial_idea
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: initial_idea
+      height: 221
+      id: '1774533352255'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 综合初始想法与对话历史，通过 FSM 状态机判定当前意图阶段（不足、冲突、就绪、收敛）。
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-chat
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: c53a9f59-c9c0-4b2c-bffb-79e701797e1d
+          role: system
+          text: "# Role\n你是一个资深且务实的科研开题导师。你的任务是综合评估用户的初始想法及当前最新反馈，判断其意图阶段，并输出状态码以驱动后端路由。\n\
+            \n# Input Context\n- 研究领域：{{#1774533352255.research_domain#}}\n- 可用资源/限制：{{#1774533352255.available_resources#}}\n\
+            - 初始模糊想法：{{#1774533352255.initial_idea#}}\n- 用户当前输入：{{#sys.query#}}\n\n\
+            # 评估逻辑与状态定义\n你需要根据上下文（请结合节点的对话记录功能），将当前意图归类为以下四种状态之一：\n\n1. \"INSUFFICIENT\"\
+            \ (信息不足)：想法太泛（如“研究大模型”），无法提炼精准检索词。需温柔追问。\n2. \"CONFLICT\" (资源冲突)：想法与资源严重不匹配（如“单显卡想训练大模型”）。需指出冲突并建议平替。\n\
+            3. \"READY\" (准备检索)：方向具体，具备可行性。你需提炼 3-5 个具体的学术检索关键词。\n4. \"CONVERGE\"\
+            \ (决策收敛)：用户在当前输入的 {{#sys.query#}}中，明确表达了对先前系统建议路径的选择（例如：“我选路径1”、“方案2比较好”）。\n\
+            \n# 优先级规则 (Priority)\n- 若 {{#sys.query#}} 为空或仅为简单的打招呼，请重点评估初始变量 {{#1774533352255.initial_idea#}}。\n\
+            - 若用户正在针对之前给出的搜索结果做反馈，优先识别 {{#sys.query#}} 是否满足 \"CONVERGE\" 状态。\n-若{{#sys.query#}}是给你的约束和提示，在重点评估初始变量的同时，满足用户的要求（例如让你用更亲切的语气回答）\n\
+            \n# Output Format (严格 JSON)\n必须直接输出 JSON 对象，严禁包含任何 Markdown 标签：\n{\n \
+            \ \"reply_to_user\": \"导师的话：状态1/2说明原因并引导；状态3列出关键词并询问是否开始检索；状态4确认选择并开始生成最终建议。\"\
+            ,\n  \"intent_status\": \"只能输出 INSUFFICIENT, CONFLICT, READY, 或 CONVERGE\"\
+            ,\n  \"keywords\": [\"仅当状态为 READY 时输出关键词数组，否则为空数组\"]\n}"
+        selected: false
+        title: 意图对齐层 (Gatekeeper)
+        type: llm
+        vision:
+          enabled: false
+      height: 148
+      id: llm
+      position:
+        x: 378
+        y: 303
+      positionAbsolute:
+        x: 378
+        y: 303
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: 61f71626-9d4a-413e-9f56-f8742c378fd5
+            value: READY
+            varType: string
+            variable_selector:
+            - '1774536551011'
+            - out_status
+          id: 'true'
+          logical_operator: and
+        - case_id: c101a899-6ab8-4da9-9f46-7fcaeb3fd601
+          conditions:
+          - comparison_operator: contains
+            id: 8a550a3d-d87b-4047-b5a5-32f977479e77
+            value: INSUFFICIENT
+            varType: string
+            variable_selector:
+            - '1774536551011'
+            - out_status
+          - comparison_operator: contains
+            id: 5f058218-acf0-4ab6-883a-e66e5b2a1b91
+            value: CONFLICT
+            varType: string
+            variable_selector:
+            - '1774536551011'
+            - out_status
+          id: c101a899-6ab8-4da9-9f46-7fcaeb3fd601
+          logical_operator: or
+        - case_id: ac07b7a5-8f20-4420-a1a8-99ae5d19c1d0
+          conditions:
+          - comparison_operator: contains
+            id: 86cb1c5b-b888-4501-89c3-4724aebe3ef5
+            value: CONVERGE
+            varType: string
+            variable_selector:
+            - '1774536551011'
+            - out_status
+          id: ac07b7a5-8f20-4420-a1a8-99ae5d19c1d0
+          logical_operator: and
+        desc: 根据 out_status 将流程精确导向情报侦察、意图补全或最终交付分支。
+        selected: false
+        title: 状态路由分发
+        type: if-else
+      height: 386
+      id: '1774534693958'
+      position:
+        x: 967.5631372346968
+        y: 303
+      positionAbsolute:
+        x: 967.5631372346968
+        y: 303
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1774536068334.final_reply#}}'
+        desc: 向用户反馈当前的逻辑漏洞或资源不可行性，提供建设性的修改建议。
+        selected: false
+        title: 输出：拦截建议/细化引导
+        type: answer
+        variables: []
+      height: 146
+      id: '1774535950033'
+      position:
+        x: 1542.3142121127964
+        y: 499.89433433347523
+      positionAbsolute:
+        x: 1542.3142121127964
+        y: 499.89433433347523
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(arg1):\n    import json\n    import re\n    \n    # 1. arg1\
+          \ 此时直接就是大模型吐出来的长字符串文本\n    raw_text = arg1 if arg1 else \"{}\"\n    \n \
+          \   # 2. 清理可能存在的 ```json 等 Markdown 标签\n    cleaned_text = re.sub(r'^```[a-zA-Z]*\\\
+          n', '', raw_text.strip(), flags=re.MULTILINE)\n    cleaned_text = re.sub(r'\\\
+          n```$', '', cleaned_text).strip()\n    \n    try:\n        # 3. 解析纯净的 JSON\n\
+          \        data = json.loads(cleaned_text)\n        \n        # 4. 提取回复字段，如果没有则用默认话术兜底\n\
+          \        reply = data.get(\"reply_to_user\", \"导师觉得你的想法还需要再具象一点哦，请补充一下你的具体数据和资源条件~\"\
+          )\n        \n    except Exception as e:\n        # 5. 终极异常兜底\n        reply\
+          \ = \"抱歉，导师刚刚开小差了。能否换一种更具体的描述方式（例如：你想解决什么问题 + 使用什么数据）重新告诉我？\"\n        \n\
+          \    return {\n        \"final_reply\": reply\n    }"
+        code_language: python3
+        desc: 提取 Gatekeeper 生成的引导性追问或资源冲突解释文本，确保输出的一致性。
+        outputs:
+          final_reply:
+            children: null
+            type: string
+        selected: false
+        title: 话术预处理
+        type: code
+        variables:
+        - value_selector:
+          - llm
+          - text
+          value_type: string
+          variable: arg1
+      height: 112
+      id: '1774536068334'
+      position:
+        x: 1263.2574960810496
+        y: 499.89433433347523
+      positionAbsolute:
+        x: 1263.2574960810496
+        y: 499.89433433347523
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(llm_output):\n    import json\n    import re\n    \n    #\
+          \ 1. Dify 直接将变量传进来了，如果为空则给默认的空 JSON 字符串\n    raw_text = llm_output if llm_output\
+          \ else \"{}\"\n    \n    # 2. 核心防御机制：清理大模型可能带有的 Markdown 代码块标签 (如 ```json\
+          \ ... ```)\n    cleaned_text = re.sub(r'^```[a-zA-Z]*\\n', '', raw_text.strip(),\
+          \ flags=re.MULTILINE)\n    cleaned_text = re.sub(r'\\n```$', '', cleaned_text).strip()\n\
+          \    \n    try:\n        # 3. 尝试解析干净的 JSON\n        data = json.loads(cleaned_text)\n\
+          \        \n        status = data.get(\"intent_status\", \"UNKNOWN\")\n \
+          \       reply = data.get(\"reply_to_user\", \"系统未生成回复，请重试。\")\n        \n\
+          \        # 提取关键词并转为字符串\n        keywords_list = data.get(\"keywords\", [])\n\
+          \        keywords_str = \", \".join(keywords_list) if isinstance(keywords_list,\
+          \ list) else str(keywords_list)\n        \n    except Exception as e:\n\
+          \        # 4. 终极兜底：万一连清理后都不是合法 JSON\n        status = \"ERROR\"\n      \
+          \  reply = \"系统解析数据失败，大模型刚才似乎开小差了。能否换一种简单的描述方式重新告诉我？\"\n        keywords_str\
+          \ = \"\"\n        \n    # 输出这三个干净的变量给下游的条件分支\n    return {\n        \"out_status\"\
+          : status,\n        \"out_reply\": reply,\n        \"out_keywords\": keywords_str\n\
+          \    }"
+        code_language: python3
+        desc: 清洗 LLM 输出的 Markdown 标签，并将 JSON 解析为 out_status 等强类型路由变量。
+        outputs:
+          out_keywords:
+            children: null
+            type: string
+          out_reply:
+            children: null
+            type: string
+          out_status:
+            children: null
+            type: string
+        selected: false
+        title: 数据总线 (Data Bus)
+        type: code
+        variables:
+        - value_selector:
+          - llm
+          - text
+          value_type: string
+          variable: llm_output
+      height: 112
+      id: '1774536551011'
+      position:
+        x: 667.9141027623928
+        y: 303
+      positionAbsolute:
+        x: 667.9141027623928
+        y: 303
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        agent_parameters:
+          instruction:
+            type: constant
+            value: "# Role\n你是一位专业、耐心且极具洞察力的科研开题导师与学术情报分析师。你的任务是调用检索工具，为【科研新手】梳理出\
+              \ 2-3 条具有差异化、且切实可行的候选研究路径，帮助他们走出前期的迷茫。\n\n# 核心工作原则 (Strict Rules)\n\
+              1. 强制检索：必须首先使用 `tavily` 工具，以上下文中的“检索关键词”进行全网最新文献和技术路线的搜索。严禁凭空捏造。\n2.\
+              \ 来源分级优先：优先采信高质量学术域名的结果（如 arxiv.org, acm.org），其次是优质技术社区。\n3. 客观展现分歧：当搜索结果对某一方法存在分歧时，客观地将其作为“学术探讨空间\
+              \ (Research Gap)”列出，鼓励用户探索。\n4. 严格引用：所有客观陈述、数据或现有方法，必须在句末使用括号标注来源（如：[参考文献标题]\
+              \ 或 [来源网站URL]）。\n5. 效率与收敛：最多进行 2-3 轮检索。若未找到完美匹配，请基于现有可靠信息与你的专业知识进行“最佳推断”，及时输出报告。\n\
+              \n# Output Format (输出结构要求)\n请严格以 Markdown 格式输出，语气保持鼓励和专业。必须包含以下四个部分：\n\
+              \n### 一、 领域现状全景速览 \n(结合检索结果，用 150 字概括该方向的研究热度与核心痛点，需带引用)\n\n### 二、 候选研究路径比较\
+              \ \n(给出 2-3 条具有明显差异的路径。对每条路径，请详细说明：核心切入点、预期优势、潜在挑战，并务必结合用户的【可用资源】给出客观的匹配度评估)\n\
+              \n### 三、 路径横向对比矩阵 \n(输出 Markdown 表格，对比维度包括：创新度、工程难度、数据依赖、预算适配度、推荐指数)\n\
+              \n### 四、 导师的下一步引导 (Action Required)\n(必须在结尾原样输出以下这段话，引导用户做出决策：)\n> “以上是我为你梳理的几条潜在路径，每一条都有其独特的学术价值。请结合你的真实兴趣和手头资源，回复你最倾向探索哪一条（例如回复：‘我倾向于选择路径\
+              \ 2’）。\n> **当你做出选择后，我将为你进行整个科研任务的梳理**”"
+          maximum_iterations:
+            type: constant
+            value: 10
+          model:
+            type: constant
+            value:
+              completion_params: {}
+              mode: chat
+              model: deepseek-chat
+              model_type: llm
+              provider: langgenius/deepseek/deepseek
+              type: model-selector
+          query:
+            type: constant
+            value: '请立即开始侦察与梳理工作。
+
+
+              【背景上下文】
+
+              - 用户的研究领域是：{{#1774533352255.research_domain#}}
+
+              - 用户的资源/客观限制条件是：{{#1774533352255.available_resources#}}
+
+
+              【检索指令】
+
+              请你使用 tavily 工具，在全网（优先学术库与高质量技术社区）搜索以下核心关键词：
+
+              {{#1774536551011.out_keywords#}}
+
+
+              【任务要求】
+
+              请根据检索到的最新文献和技术发展现状，严格结合上述“资源限制条件”进行可行性过滤，然后完全按照系统指令（Instructions）中规定的
+              Markdown 格式（全景速览、路径比较、对比矩阵、下一步指令），输出完整的路径梳理报告。'
+          tools:
+            type: constant
+            value:
+            - enabled: true
+              extra:
+                description: 专为人工智能代理 (LLM) 构建的搜索引擎工具，可快速提供实时、准确和真实的结果。
+              parameters:
+                country:
+                  auto: 1
+                  value: null
+                end_date:
+                  auto: 1
+                  value: null
+                exclude_domains:
+                  auto: 1
+                  value: null
+                include_domains:
+                  auto: 1
+                  value: null
+                query:
+                  auto: 1
+                  value: null
+                search_depth:
+                  auto: 1
+                  value: null
+                start_date:
+                  auto: 1
+                  value: null
+                time_range:
+                  auto: 1
+                  value: null
+                topic:
+                  auto: 1
+                  value: null
+              provider_name: langgenius/tavily/tavily
+              provider_show_name: langgenius/tavily/tavily
+              settings:
+                auto_parameters:
+                  value:
+                    type: constant
+                    value: false
+                chunks_per_source:
+                  value:
+                    type: constant
+                    value: 3
+                include_answer:
+                  value:
+                    type: constant
+                    value: 'false'
+                include_favicon:
+                  value:
+                    type: constant
+                    value: false
+                include_image_descriptions:
+                  value:
+                    type: constant
+                    value: false
+                include_images:
+                  value:
+                    type: constant
+                    value: false
+                include_raw_content:
+                  value:
+                    type: constant
+                    value: 'false'
+                include_usage:
+                  value:
+                    type: constant
+                    value: false
+                max_results:
+                  value:
+                    type: constant
+                    value: 5
+                project_id:
+                  value:
+                    type: mixed
+                    value: null
+              tool_description: 专为人工智能代理 (LLM) 构建的搜索引擎工具，可快速提供实时、准确和真实的结果。
+              tool_label: Tavily Search
+              tool_name: tavily_search
+              type: builtin
+        agent_strategy_label: ReAct
+        agent_strategy_name: ReAct
+        agent_strategy_provider_name: langgenius/agent/agent
+        desc: 采用 ReAct 范式调用 Tavily 检索最新学术动态，产出带资源匹配度的候选路径矩阵。
+        meta:
+          minimum_dify_version: 1.7.0
+          version: 0.0.2
+        output_schema: {}
+        plugin_unique_identifier: langgenius/agent:0.0.34@4b41a374567eb7cb226ee2f851513794566956008f1166c63205efc921be72d8
+        selected: false
+        title: 情报侦察层 (Scout Agent)
+        tool_node_version: '2'
+        type: agent
+      height: 248
+      id: '1774536894669'
+      position:
+        x: 1263.2574960810496
+        y: 231.7538475861934
+      positionAbsolute:
+        x: 1263.2574960810496
+        y: 231.7538475861934
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1774536894669.text#}}'
+        desc: 向用户交付多路径对比报告，并引导用户根据个人偏好做出最终科研路径决策。
+        selected: false
+        title: 展示：调研报告与路径矩阵
+        type: answer
+        variables: []
+      height: 162
+      id: '1774538102591'
+      position:
+        x: 1542.3142121127964
+        y: 231.7538475861934
+      positionAbsolute:
+        x: 1542.3142121127964
+        y: 231.7538475861934
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 确认路径选择，结合资源限制进行最后的风险校验，生成最终开题报告雏形。
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-chat
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: 886169c0-8ecd-4f2f-ac88-9745b63a3b79
+          role: system
+          text: '# Role
+
+            你是一位睿智、严谨且极具落地能力的资深科研导师。用户已经从你提供的建议中做出了最终选择，你现在的任务是为他举行一个简洁的“开题启动仪式”，产出一份具有实操价值的选题执行方案。
+
+
+            # Task
+
+            1. 决策确认：肯定用户的选择，并简述该路径在当前学术环境下的价值。
+
+            2. 风险预警：再次对照用户的 {{#1774533352255.available_resources#}}，指出该路径在落地过程中最可能遇到的
+            1-2 个坑（如算力缺口、数据获取难度），并给出 Plan B。
+
+            3. 结构化交付：将模糊的选择转化为标准的学术表达。
+
+
+            # Output Format (严格按以下 Markdown 结构输出)
+
+
+            ## ✅ 最终选题确认：[请生成一个学术规范且响亮的论文题目]
+
+
+            ### 1. 核心研究逻辑 (Research Logic)
+
+            - **核心问题 (Research Question)**：用一句话精准描述本选题要解决的痛点。
+
+            - **预期创新点**：说明该路径相较于传统方法的独特之处。
+
+
+            ### 2. 资源适配与防坑指南 (Feasibility & Risks)
+
+            - **匹配评估**：针对你拥有的 {{#1774533352255.available_resources#}}，我认为最核心的支撑点是[点出资源优势]。
+
+            - **风险提示**：[指出 1 个潜在的工程或学术硬伤]。
+
+            - **规避建议**：[给出具体的 Plan B]。
+
+
+            ### 3. 落地行动清单 (Next 48 Hours)
+
+            - [ ] **文献深挖**：推荐 2 个最值得去搜索的特定关键词或必读经典综述。
+
+            - [ ] **实验/数据破冰**：建议第一步要下载的数据集或要跑通的 GitHub Demo。
+
+            - [ ] **框架搭建**：建议先完成哪部分的思路梳理。
+
+
+            ---
+
+            > “科研的第一步往往是最难的，但既然方向已定，剩下的就是行动。加油，期待看到你的初稿！”'
+        selected: false
+        title: 执行交付层 (Convergence)
+        type: llm
+        vision:
+          enabled: false
+      height: 132
+      id: '1774541255600'
+      position:
+        x: 1263.2574960810496
+        y: 674.8866219510882
+      positionAbsolute:
+        x: 1263.2574960810496
+        y: 674.8866219510882
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1774541255600.text#}}'
+        desc: 交付包含题目、RQ、风险对齐及 48 小时行动清单的最终研究提案。
+        selected: false
+        title: 输出：结构化选题建议书
+        type: answer
+        variables: []
+      height: 146
+      id: '1774541399096'
+      position:
+        x: 1542.3142121127964
+        y: 674.8866219510882
+      positionAbsolute:
+        x: 1542.3142121127964
+        y: 674.8866219510882
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 12.051518752530683
+      y: -31.055064557240485
+      zoom: 0.6973718331752031
+  rag_pipeline_variables: []
